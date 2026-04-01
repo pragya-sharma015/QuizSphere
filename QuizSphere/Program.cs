@@ -1,9 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using QuizSphere.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
 
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<QuizSphereContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("DBCS")));
 var app = builder.Build();
+
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

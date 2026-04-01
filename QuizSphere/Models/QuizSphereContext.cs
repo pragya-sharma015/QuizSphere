@@ -21,12 +21,13 @@ namespace QuizSphere.Models
         public virtual DbSet<Option> Options { get; set; } = null!;
         public virtual DbSet<Question> Questions { get; set; } = null!;
         public virtual DbSet<Quiz> Quizzes { get; set; } = null!;
-        public virtual DbSet<User> Users { get; set; } = null!;
+        public virtual DbSet<Users> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
+
             }
         }
 
@@ -80,12 +81,10 @@ namespace QuizSphere.Models
                 entity.Property(e => e.Title).HasMaxLength(50);
             });
 
-            modelBuilder.Entity<User>(entity =>
+            modelBuilder.Entity<Users>(entity =>
             {
-                entity.ToTable("User");
-
-                entity.Property(e => e.UserId).HasColumnName("UserID");
-
+                
+                entity.HasKey(e => e.UserId);
                 entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
 
                 entity.Property(e => e.Email).HasMaxLength(150);
